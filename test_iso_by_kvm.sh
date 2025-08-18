@@ -3,14 +3,14 @@
 sudo virsh destroy preseedtest01
 sudo virsh undefine preseedtest01 --nvram
 
-sudo rm -rf /var/lib/libvirt/images/preseed_system.qcow2
-sudo rm -rf /var/lib/libvirt/images/preseed_data.qcow2
-sudo rm -rf auto-debian.iso
-sudo rm -rf /var/lib/libvirt/images/auto-debian.iso
+sudo rm -r /var/lib/libvirt/images/preseed_system.qcow2
+sudo rm -r /var/lib/libvirt/images/preseed_data.qcow2
+sudo rm -r auto-debian.iso
+sudo rm -r /var/lib/libvirt/images/auto-debian.iso
 
-sudo /bin/bash make_iso_v2.sh
+sudo /bin/bash make_iso_by_preseed.sh
 
-sudo mv -f auto-debian.iso /var/lib/libvirt/images/
+sudo mv auto-debian.iso /var/lib/libvirt/images/
 
 sudo virt-install \
   --name preseedtest01 \
@@ -28,3 +28,4 @@ sudo virt-install \
 
   #--disk /var/lib/libvirt/images/preseed_system.qcow2,size=500,format=qcow2,cache=none \
   #--disk /var/lib/libvirt/images/preseed_data.qcow2,size=2000,format=qcow2,cache=none \
+  
